@@ -98,7 +98,7 @@ const ProductDetailsCard = ({ product }: { product: Product }) => {
               <Button
                 className="flex-1"
                 size="lg"
-                onClick={() => addToCart(product)}
+                onClick={() => addToCart(product, quantity)}
               >
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 Add to Cart
