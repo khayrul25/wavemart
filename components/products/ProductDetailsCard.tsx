@@ -7,9 +7,10 @@ import { Badge } from "@/components/ui/badge";
 import { ShoppingCart, Heart } from "lucide-react";
 import { Product } from "@/services/product.service";
 import { useState } from "react";
-import Image from "next/image";
+import { useCartStore } from "@/store/cart.store";
 
 const ProductDetailsCard = ({ product }: { product: Product }) => {
+  const addToCart = useCartStore((state) => state.addToCart);
   const [selectedImage, setSelectedImage] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
@@ -94,7 +95,11 @@ const ProductDetailsCard = ({ product }: { product: Product }) => {
 
             {/* Action Buttons */}
             <div className="flex gap-3 pt-4">
-              <Button className="flex-1" size="lg">
+              <Button
+                className="flex-1"
+                size="lg"
+                onClick={() => addToCart(product)}
+              >
                 <ShoppingCart className="mr-2 h-5 w-5" />
                 Add to Cart
               </Button>
