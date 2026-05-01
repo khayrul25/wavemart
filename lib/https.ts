@@ -1,10 +1,9 @@
 type FetchOptions = RequestInit & {
   auth?: boolean;
-  cache?: RequestCache;
 };
 
 export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
-  const { auth, cache, ...fetchOptions } = options;
+  const { auth, ...fetchOptions } = options;
 
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}`,
@@ -16,8 +15,7 @@ export async function apiFetch(endpoint: string, options: FetchOptions = {}) {
         }),
         ...fetchOptions.headers,
       },
-      cache: cache ?? "no-store",
-    }
+    },
   );
 
   if (!res.ok) {

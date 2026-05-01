@@ -13,6 +13,16 @@ const nextConfig: NextConfig = {
         hostname: "encrypted-tbn0.gstatic.com",
         port: "",
       },
+      {
+        protocol: "https",
+        hostname: "static.wikia.nocookie.net",
+        port: "",
+      },
+      {
+        protocol: "https",
+        hostname: "imgur.com",
+        port: "",
+      },
     ],
   },
   /* config options here */
