@@ -12,11 +12,16 @@ export const useSyncFiltersToUrl = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      const query = buildProductQuery(filters);
-      const params = new URLSearchParams(query);
-      if (filters.sortBy) {
-        params.set("sortBy", filters.sortBy);
-      }
+      // Create new params purely for the URL state, ignoring API-specific 'offset' and 'limit'
+      const params = new URLSearchParams();
+      
+      if (filters.title) params.set("title", filters.title);
+      if (filters.categoryId) params.set("categoryId", String(filters.categoryId));
+      if (filters.price_min) params.set("price_min", String(filters.price_min));
+      if (filters.price_max) params.set("price_max", String(filters.price_max));
+      if (filters.sortBy) params.set("sortBy", filters.sortBy);
+      if (filters.page && filters.page > 1) params.set("page", String(filters.page));
+      
       const fullQuery = params.toString();
       router.replace(fullQuery ? `${pathname}?${fullQuery}` : pathname, {
         scroll: false,

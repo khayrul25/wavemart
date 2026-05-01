@@ -8,6 +8,7 @@ export type ProductFilters = {
   price_max?: number;
   price_min?: number;
   sortBy?: SortOption;
+  page?: number;
 };
 
 type ProductFiltersState = {
@@ -20,13 +21,17 @@ type ProductFiltersState = {
 };
 
 export const useProductFilters = create<ProductFiltersState>((set) => ({
-  filters: {},
+  filters: { page: 1 },
   setFilters: (key, value) =>
-    set((state) => ({
-      filters: {
-        ...state.filters,
-        [key]: value || undefined,
-      },
-    })),
-  resetFilters: () => set({ filters: {} }),
+    set((state) => {
+      const resetPage = key !== "page" && key !== "sortBy" ? { page: 1 } : {};
+      return {
+        filters: {
+          ...state.filters,
+          ...resetPage,
+          [key]: value || undefined,
+        },
+      };
+    }),
+  resetFilters: () => set({ filters: { page: 1 } }),
 }));
