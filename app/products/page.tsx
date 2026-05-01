@@ -3,8 +3,10 @@ import ProductFilterPagination from "@/components/products/product-filter/Produc
 import ProductFilterPanel from "@/components/products/product-filter/ProductFilterPanel";
 import ProductToolbar from "@/components/products/product-filter/ProductToolbar";
 import ProductHeaderBadge from "@/components/products/product-filter/ProductHeaderBadge";
+import { connection } from "next/server";
 
-export default function ProductFilterPage() {
+export default async function ProductFilterPage() {
+  await connection();
   return (
     <div className="min-h-screen bg-muted/30">
       <header className="sticky top-0 z-40 border-b bg-background/80 backdrop-blur-md">
